@@ -87,20 +87,20 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadCategories(): Promise<void> {
-      try {
-        const response = await api.get('/categories');
+      const response = await api.get('/categories');
 
-        setCategories(response.data);
-      } catch (error) {
-        console.log(error);
-      }
+      setCategories(response.data);
     }
 
     loadCategories();
   }, []);
 
   function handleSelectCategory(id: number): void {
-    setSelectedCategory(id);
+    if (selectedCategory === id) {
+      setSelectedCategory(undefined);
+    } else {
+      setSelectedCategory(id);
+    }
   }
 
   return (
